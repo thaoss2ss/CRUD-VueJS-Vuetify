@@ -1,7 +1,7 @@
 <template>
   <div>
   <v-app class="indigo">
-    <v-content style="bg-color:blue">
+    <v-main style="bg-color:blue">
       <v-container>
         <v-layout row>
           <v-flex xs12>
@@ -57,7 +57,7 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </div>
 </template>
@@ -76,6 +76,12 @@ export default {
     index:0,
     tasks:[]
   }),
+  created() {
+      let taskDB = JSON.parse(localStorage.getItem('tasks'))
+      if (taskDB) {
+        this.tasks = taskDB;
+      }
+    },
   methods:{
     addTask:function(t,d,e){
       e.preventDefault();
@@ -118,12 +124,7 @@ export default {
       localStorage.setItem('tasks',JSON.stringify(this.tasks))
     },
     
-  },
-  created() {
-      let taskDB = JSON.parse(localStorage.getItem('tasks'))
-      if (taskDB) {
-        this.tasks = taskDB;
-      }
-    },
+  }
+  
 };
 </script>
